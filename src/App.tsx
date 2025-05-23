@@ -1,9 +1,13 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import Layout from "./components/Layout";
+import Dashboard from "./components/Dashboard";
+import TestCases from "./pages/TestCases";
+import Pipelines from "./pages/Pipelines";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -15,8 +19,14 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="test-cases" element={<TestCases />} />
+            <Route path="pipelines" element={<Pipelines />} />
+            <Route path="documentation" element={<div className="text-white text-center py-20">Documentation - Coming Soon</div>} />
+            <Route path="test-data" element={<div className="text-white text-center py-20">Test Data Management - Coming Soon</div>} />
+            <Route path="reports" element={<div className="text-white text-center py-20">Reports - Coming Soon</div>} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
